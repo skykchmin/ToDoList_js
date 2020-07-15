@@ -1,16 +1,27 @@
-const weahter = document.querySelector(".js-weather");
+const weather = document.querySelector(".js-weather");
 
 const COORDS = 'coords';
 const API_KEY ="241051bf13976dd3ddf8b8d9f247255e";
 
 function getWeather(lat, long){
+    let weatherIcon = { 
+        '01' : 'fas fa-sun'
+
+    }
+
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
     ).then(function(response){
         return response.json()
     }).then(function(json){
-        const temperature = json.main.temp;
-        const place = json.name;
-        weahter.innerText = `${temperature} @${place}`;
+
+        var icon = (json.weather[0].icon).substr(0,2);
+
+        var temperature = json.main.temp;
+        var place = json.name;
+        var locationWeather = json.weather[0].description;
+
+        // icon.innerHTML(`<i class="${weatherIcon[icon]}"></i>`);
+        weather.innerText = `${locationWeather} ${temperature}°C ${place}`;
     }); //then 함수 기본적으로 함수를 호출하는 것
 }
 

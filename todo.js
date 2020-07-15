@@ -24,7 +24,7 @@ function saveToDos(){ //toDos를 가져와서 로컬에 저장해야한다.
 function paintToDo(text){
     const li = document.createElement("li"); //html 태그를 만든다
     const delBtn = document.createElement("button");
-    delBtn.innerHTML = "Delete";
+    delBtn.innerHTML = "❌";
     const span = document.createElement("span");
     const newID = toDos.length + 1;
     span.innerText = text;
@@ -51,8 +51,8 @@ function handleSubmit(event){
 function loadToDos(){
     const loadedtoDos = localStorage.getItem(TODOS_LS);
 
-    if(loadedtoDos === null){ //계속 할일이 적혀있을거기 때문에 else는 필요가 없음
-        const parsedToDos = JSON.parse(loadToDos); //string을 다시 객체형태로 
+    if(loadedtoDos !== null){ //계속 할일이 적혀있을거기 때문에 else는 필요가 없음
+        const parsedToDos = JSON.parse(loadedToDos); //string을 다시 객체형태로 
         parsedToDos.forEach(function(toDo){
             paintToDo(toDo.text);
         }); // array에 담겨있는것만큼 함수를 실행시켜준다
